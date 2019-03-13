@@ -1,2 +1,2 @@
-# Tsoha
+# Scribase
 A database of scripts.

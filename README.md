@@ -1,6 +1,6 @@
 # Scribase (best name)
 A database of scripts.
-A place where you can upload scripts in any language that you find is or could be useful to you or someone else.
+A place where you can upload scripts in any language that you think is or could be useful to you or someone else.
 ## Possible features of this project
 Rating system
 

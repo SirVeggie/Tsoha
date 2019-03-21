@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('scripts_create') }}">
+  Name: <input type="text" name="name"/><br><br>
+  Author: <input type="text" name="author"><br><br>
+  Language: <input type="text" name="language"/><br><br>
+  Content: <input type="text" name="content"/><br><br>
+  <input type="submit" value="Add a new script"/>
+</form>
+{% endblock %}

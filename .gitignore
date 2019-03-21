@@ -1,6 +1,6 @@
 venv
 scripts.db
-
+push heroku.bat
 
 
 # Python's gitignore template

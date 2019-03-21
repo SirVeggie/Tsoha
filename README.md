@@ -6,7 +6,7 @@ A place where you can upload scripts in any language that you think is or could 
 [Heroku](https://scribase.herokuapp.com/)
 
 ### Documentation
+[Feature list](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Feature%20list.md)
 
-
-
+[database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png)
 

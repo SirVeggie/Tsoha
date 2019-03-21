@@ -10,6 +10,10 @@ def script_list():
 def script_form():
     return render_template("scripts/new.html")
 
+@app.route("/scripts/<script_id>/")
+def script_show(script_id):
+    return render_template("scripts/single.html", script = Script.query.get(script_id))
+
 @app.route("/scripts/", methods=["POST"])
 def scripts_create():
     s = Script(request.form.get("name"), 

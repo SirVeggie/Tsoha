@@ -4,16 +4,12 @@
   <table>
     <tr>
       <th>Script</th>
-      <th>Author</th>
       <th>Language</th>
-      <th>Content</th>
     </tr>
     {% for script in scripts %}
     <tr>
-      <td>{{ script.name }}</td>
-      <td>{{ script.author }}</td>
+      <td><a href="/scripts/{{ script.id }}">{{ script.name }}</a></td>
       <td>{{ script.language }}</td>
-      <td>{{ script.content }}</td>
     </tr>
     {% endfor %}
   </table>

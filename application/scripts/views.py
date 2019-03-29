@@ -2,7 +2,7 @@ from application import app, db
 from flask import render_template, request, url_for, redirect
 from application.scripts.models import Script
 
-@app.route("/scripts", methods=["GET"])
+@app.route("/scripts/", methods=["GET"])
 def script_list():
     return render_template("scripts/list.html", scripts = Script.query.all())
 
@@ -26,3 +26,6 @@ def scripts_create():
 
     return redirect(url_for("script_list"))
 
+@app.route("/scripts/<script_id>/", methods=["POST"])
+def script_modify(script_id):
+    return redirect("/scripts/" + str(script_id) + "/")

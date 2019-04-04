@@ -11,5 +11,5 @@ Create a new account to use the app properly.
 Check the documentation for the 
 [Feature list](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Feature%20list.md)
 and
-[database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png)
-. More will be added at a later date.
+[database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png).
+More will be added at a later date.

@@ -1,11 +1,47 @@
 {% extends "layout.html" %}
   
 {% block body %}
+<pre>{{ error }}</pre>
 <form method="POST" action="{{ url_for('scripts_create') }}">
+  <table>
+    <tr>
+      <td>
+        {{ form.name.label }}
+      </td>
+      <td>
+        {{ form.name }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.language.label }}
+      </td>
+      <td>
+        {{ form.language }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ form.content.label }}
+      </td>
+      <td>
+        {{ form.content }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Confirm"/>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}
+
+<!--
   Name: <input type="text" name="name"/><br><br>
   Author: <input type="text" name="author"><br><br>
   Language: <input type="text" name="language"/><br><br>
   Content: <br><textarea rows="5" cols="60" name="content"></textarea><br><br>
   <input type="submit" value="Add a new script"/>
 </form>
-{% endblock %}
+-->

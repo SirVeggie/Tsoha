@@ -10,7 +10,7 @@ div.indented {
 pre.code {
   white-space: pre-wrap;
   background-color: #DCDCDC;
-  width: 50%;
+  width: 70%;
 }
 </style>
 {% endblock %}
@@ -19,18 +19,18 @@ pre.code {
 
 {% block body %}
 <h1>{{ script.name }}</h1>
-by: {{ script.author }}<br><br>
+by: {{ author }}<br><br>
 Made with {{ script.language }}.<br><br>
+
 <pre class="code">
 <div class="indented">
 {{ script.content }}
 </div>
 </pre>
-<br>
 
-<br><br>
+<br><br><br>
 <form method="POST" action="{{ url_for('script_modify', script_id=script.id) }}">
   Edit content: <br><textarea rows="5" cols="60" name="content">{{ script.content }}</textarea><br><br>
-  <input type="submit" value="Modify content"/>
+  <input type="submit" value="Confirm"/>
 </form>
 {% endblock %}

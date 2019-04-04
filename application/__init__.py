@@ -19,6 +19,7 @@ from application.scripts import models
 from application.scripts import views
 from application.auth import models
 from application.auth import views
+from application.comments import models
 
 
 #Login

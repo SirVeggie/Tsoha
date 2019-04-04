@@ -19,7 +19,7 @@ pre.code {
 
 {% block body %}
 <h1>{{ script.name }}</h1>
-by: {{ author }}<br><br>
+by: <a href="/account/{{ script.author_id }}">{{ author }}</a><br><br>
 Made with {{ script.language }}.<br><br>
 
 <pre class="code">
@@ -28,9 +28,22 @@ Made with {{ script.language }}.<br><br>
 </div>
 </pre>
 
+
+<form method="POST" action="{{ url_for('script_delete', script_id=script.id) }}">
+  <input type="submit" value="Delete"/> {{ delError }}
+</form>
+
 <br><br><br>
+
 <form method="POST" action="{{ url_for('script_modify', script_id=script.id) }}">
   Edit content: <br><textarea rows="5" cols="60" name="content">{{ script.content }}</textarea><br><br>
   <input type="submit" value="Confirm"/>
 </form>
+
+<br><br><br>
+
+New comment:
+
+
+
 {% endblock %}

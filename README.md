@@ -5,6 +5,8 @@ A place where you can upload scripts in any language that you think is or could 
 ## Links
 [Heroku](https://scribase.herokuapp.com/)
 
+Create a new account to use the app properly.
+
 ### Documentation
 [Feature list](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Feature%20list.md)
 

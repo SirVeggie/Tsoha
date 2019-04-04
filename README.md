@@ -3,6 +3,7 @@ A database of scripts.
 A place where you can upload scripts in any language that you think is or could be useful to you or someone else.
 
 ## Links
+### Heroku
 Find the [Heroku app](https://scribase.herokuapp.com/) here.
 Create a new account to use the app properly.
 

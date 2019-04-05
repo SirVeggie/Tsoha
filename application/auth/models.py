@@ -1,5 +1,6 @@
 from application import db
 from application.models import Base
+from sqlalchemy.sql import text
 
 class User(Base):
     __tablename__ = "account"
@@ -25,3 +26,16 @@ class User(Base):
 
     def is_authenticated(self):
         return True
+
+    @staticmethod
+    def number_of_active_users():
+        stmt = text("SELECT COUNT(account.id) FROM account"
+                    " LEFT JOIN script ON account.id = script.author_id"
+                    " LEFT JOIN comment ON account.id = comment.author_id"
+                    " WHERE account.id = script.author_id"
+                    " OR account.id = comment.author_id")
+        res = db.engine.execute(stmt)
+
+        for row in res:
+            return row[0]
+        return 0

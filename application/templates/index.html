@@ -1,7 +1,21 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <p>
-    Hello WARUDO!
-  </p>
+<div style="width: 400px;">
+  <h2>Welcome to Scribase!</h2>
+  This is a database of all kinds of useful scripts.<br><br>
+  Some boost your day to day work efficiency on your PC.
+  Some are just fun to play around with.
+  Some are for teaching/learning purposes.<br><br>
+  Step in to explore what we have in store!
+</div>
+<div>
+  Currently there are {{ active_count }} active 
+  {% if active_count == 1 %}
+  user.
+  {% else %}
+  users.
+  {% endif %}
+  (Users that have posted scripts or comments to the forum)
+</div>
 {% endblock %}

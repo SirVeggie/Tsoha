@@ -7,8 +7,19 @@ div.indented {
   left: 15px;
 }
 
+div.comment {
+  background-color: #DCDCDC;
+}
+
+table.padded {
+  padding: 10px
+}
+td.padded {
+  text-align: center;
+  padding: 10px;
+}
+
 pre.code {
-  white-space: pre-wrap;
   background-color: #DCDCDC;
   width: 70%;
 }
@@ -18,9 +29,17 @@ pre.code {
 
 
 {% block body %}
-<h1>{{ script.name }}</h1>
+<span style="font-size: 40px;">{{ script.name }}</span>
+
+{% if current_user.id == script.author_id %}
+<form method="POST" action="{{ url_for('script_delete', script_id=script.id) }}">
+  <input type="submit" value="Delete"/>
+</form>
+{% endif %}
+
+<br><br>
 by: <a href="/account/{{ script.author_id }}">{{ author }}</a><br><br>
-Made with {{ script.language }}.<br><br>
+Made with {{ script.language }}<br><br>
 
 <pre class="code">
 <div class="indented">
@@ -28,12 +47,7 @@ Made with {{ script.language }}.<br><br>
 </div>
 </pre>
 
-
-<form method="POST" action="{{ url_for('script_delete', script_id=script.id) }}">
-  <input type="submit" value="Delete"/> {{ delError }}
-</form>
-
-<br><br><br>
+<br><br>
 
 <form method="POST" action="{{ url_for('script_modify', script_id=script.id) }}">
   Edit content: <br><textarea rows="5" cols="60" name="content">{{ script.content }}</textarea><br><br>
@@ -43,7 +57,51 @@ Made with {{ script.language }}.<br><br>
 <br><br><br>
 
 New comment:
+<form method="POST" action="{{ url_for('comment_create', script_id=script.id) }}">
+  <table>
+    <tr>
+      <td>
+        {{ commentForm.title.label }}
+      </td>
+      <td>
+        {{ commentForm.title }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ commentForm.content.label }}
+      </td>
+      <td>
+        {{ commentForm.content }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Send"/>
+      </td>
+    </tr>
+  </table>
+</form>
 
+<br><br><br>
 
-
+Comments:
+{% for com in commentObject %}
+<div class="comment">
+  <table class="padded">
+    <tr>
+      <td class="padded"><a href="/account/{{ com.comment.author_id }}">{{ com.author }}</a></td>
+      <td>{{ com.comment.title }}</td>
+    </tr>
+    <tr>
+    {% if com.comment.author_id == current_user.id %}
+      <td class="padded"><a href="{{ url_for('comment_delete', script_id=script.id, comment_id=com.comment.id) }}">Delete</a></td>
+    {% else %}
+      <td></td>
+    {% endif %}
+      <td><pre>{{ com.comment.content }}</pre></td>
+    </tr>
+  </table>
+</div><br>
+{% endfor %}
 {% endblock %}

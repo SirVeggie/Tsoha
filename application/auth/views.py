@@ -40,6 +40,11 @@ def user_create():
         return render_template("auth/sign-in.html", form = form, 
                             error = "- Name has to be at least 3 characters long -")
 
+    u = User.query.filter_by(username=form.username.data).all()
+    if u:
+        return render_template("auth/sign-in.html", form = form, 
+                            error = "- A user by that name already exists -")
+
     u = User(form.username.data,
             form.password.data)
 

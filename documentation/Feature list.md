@@ -1,4 +1,4 @@
-#Current features
+# Current features
 
 ## Possible features of this project
 Rating system

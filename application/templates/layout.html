@@ -23,6 +23,8 @@
       <li><a href="{{ url_for('script_form') }}">Add a script</a></li>
       {% if not current_user.is_authenticated %}
       <li><a href="{{ url_for('user_create') }}">Create a new account</a></li>
+      {% else %}
+      <li><a href="{{ url_for('my_page') }}">My page</a></li>
       {% endif %}
     </ul>
     

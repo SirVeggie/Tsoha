@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>{{ user.username }}</h1>
+My scripts:
+<table>
+  <tr>
+    <th>Script</th>
+    <th>Language</th>
+  </tr>
+  {% for script in scripts %}
+  <tr>
+    <td><a href="/scripts/{{ script.id }}">{{ script.name }}</a></td>
+    <td>{{ script.language }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br><br><br><br>
+
+My comments:
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Comment</th>
+    <th>Location</th>
+    <th>Date created</th>
+  </tr>
+  {% for comment in comments %}
+  <tr>
+    <td>{{ comment.title }}</td>
+    <td><pre>{{ comment.content }}</pre></td>
+    <td><a href="/scripts/{{ comment.script_id }}">Here</a></td>
+    <td>{{ comment.date_created }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

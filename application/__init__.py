@@ -21,6 +21,7 @@ from application.auth import models
 from application.auth import views
 from application.comments import models
 from application.comments import views
+from application.users import views
 
 
 #Login

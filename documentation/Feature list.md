@@ -1,20 +1,35 @@
-# Current features
+# Feature list
+## Current features
+User can create an account
+
+User can log in
+
+User can log out
+
+User can see how many active users there are
+
+User can view their own user info page
+
+User can create a new script
+
+User can delete only their own created scripts
+
+User can list all scripts
+
+User can view individual scripts
+
+User can comment on scripts
+
+User can delete only their own comments
+
+## Planned features
+User can favourite scripts to find them easily
+
+User can view other users' user info pages
 
 ## Possible features of this project
-Rating system
-
 Categories
 
 Search function
 
 Revision system; post possible changes to enhance an already existing script, or link your own version with the original
-
-Users
-
-A user page that shows all scripts you've "subscribed to"
-
-A possibility to view other users' user pages
-
-Comments on scripts
-
-Etc.

@@ -29,15 +29,15 @@ class User(Base):
 
     @staticmethod
     def number_of_active_users():
-        #stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
-        #            " LEFT JOIN script ON account.id = script.author_id"
-        #            " LEFT JOIN comment ON account.id = comment.author_id"
-        #            " WHERE account.id = script.author_id"
-        #            " OR account.id = comment.author_id")
-
         stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
-                    " INNER JOIN script, comment ON account.id = script.author_id"
+                    " LEFT JOIN script ON account.id = script.author_id"
+                    " LEFT JOIN comment ON account.id = comment.author_id"
+                    " WHERE account.id = script.author_id"
                     " OR account.id = comment.author_id")
+
+        #stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
+        #            " INNER JOIN script, comment ON account.id = script.author_id"
+        #            " OR account.id = comment.author_id")
         res = db.engine.execute(stmt)
 
         for row in res:

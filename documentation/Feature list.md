@@ -12,6 +12,8 @@ User can view their own user info page
 
 User can create a new script
 
+User can modify only their own created scripts
+
 User can delete only their own created scripts
 
 User can list all scripts

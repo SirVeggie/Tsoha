@@ -15,11 +15,11 @@ Note: use python or python3 in commands depending on your python installation.
 
 Open a command prompt in the repository's folder and input these commands:
 
-`python -m venv venv`
+1. `python -m venv venv`
 
-`venv\scripts\activate`
+2. `venv\scripts\activate`
 
-`pip install -r requirements.txt`
+3. `pip install -r requirements.txt`
 
 The installation should now be finished.
 

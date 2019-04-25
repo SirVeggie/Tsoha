@@ -6,7 +6,7 @@ Please note that this guide is for windows, and may not work for other OS.
 ### Automatic install
 Note: automatic installer is for windows only.
 
-Run the Installer.cmd found in the download folder.
+Run the `Installer.cmd` found in the download folder.
 
 If the automatic installation does not work, you may want to use the manual method.
 

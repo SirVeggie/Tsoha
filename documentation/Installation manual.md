@@ -4,9 +4,9 @@ After downloading the repository to your computer you can install the software a
 Please note that this guide is for windows, and may not work for other OS.
 
 ### Automatic install
-Run the Installer.cmd found in the download folder.
+Note: automatic installer is for windows only.
 
-If the installation is a success the console notifies you of that, otherwise it failed.
+Run the Installer.cmd found in the download folder.
 
 If the automatic installation does not work, you may want to use the manual method.
 

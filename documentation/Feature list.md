@@ -24,10 +24,10 @@ User can comment on scripts
 
 User can delete only their own comments
 
+User can view other users' user info pages
+
 ## Planned features
 User can favourite scripts to find them easily
-
-User can view other users' user info pages
 
 ## Possible features of this project
 Categories

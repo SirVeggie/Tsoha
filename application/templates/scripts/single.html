@@ -38,7 +38,7 @@ pre.code {
 {% endif %}
 
 <br><br>
-by: <a href="/account/{{ script.author_id }}">{{ author }}</a><br><br>
+by: <a href="{{ url_for('user_page', user_id=script.author_id) }}">{{ author }}</a><br><br>
 Made with {{ script.language }}<br><br>
 
 <pre class="code">
@@ -62,7 +62,7 @@ New comment:
   <table>
     <tr>
       <td>
-        {{ commentForm.title.label }}
+        <span style="white-space: pre;">{{ commentForm.title.label }}           </span>
       </td>
       <td>
         {{ commentForm.title }}
@@ -91,7 +91,7 @@ Comments:
 <div class="comment">
   <table class="padded">
     <tr>
-      <td class="padded"><a href="/account/{{ com.comment.author_id }}">{{ com.author }}</a></td>
+      <td class="padded"><a href="{{ url_for('user_page', user_id=com.comment.author_id) }}">{{ com.author }}</a></td>
       <td>{{ com.comment.title }}</td>
     </tr>
     <tr>

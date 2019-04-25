@@ -27,6 +27,10 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+    def roles(self):
+        roles = Userrole.query.filter_by(user_id=self.id).all()
+        return roles
+
     @staticmethod
     def number_of_active_users():
         stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
@@ -43,3 +47,17 @@ class User(Base):
         for row in res:
             return row[0]
         return 0
+
+
+class Userrole(db.Model):
+    __tablename__ = "userrole"
+
+    id = db.Column(db.Integer, primary_key=True)
+    role = db.Column(db.String(144), nullable=False)
+    user_id = db.Column(db.Integer,
+                          db.ForeignKey('user.id'),
+                          nullable=False)
+
+    def __init__(self, role, user_id):
+        self.role = role
+        self.user_id = user_id

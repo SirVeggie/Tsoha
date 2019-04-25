@@ -22,15 +22,21 @@ My comments:
 <table>
   <tr>
     <th>Title</th>
+    <th style="white-space: pre;">       </th>
     <th>Comment</th>
+    <th style="white-space: pre;">       </th>
     <th>Location</th>
+    <th style="white-space: pre;">       </th>
     <th>Date created</th>
   </tr>
   {% for comment in comments %}
   <tr>
     <td>{{ comment.title }}</td>
+    <td></td>
     <td><pre>{{ comment.content }}</pre></td>
+    <td></td>
     <td><a href="/scripts/{{ comment.script_id }}">Here</a></td>
+    <td></td>
     <td>{{ comment.date_created }}</td>
   </tr>
   {% endfor %}

@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
 from application import app, db
 from application.auth.models import User
@@ -31,6 +31,9 @@ def auth_logout():
 
 @app.route("/auth/sign-in", methods = ["GET", "POST"])
 def user_create():
+    if current_user:
+        return redirect("/")
+
     if request.method == "GET":
         return render_template("auth/sign-in.html", form = LoginForm())
 

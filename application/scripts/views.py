@@ -1,7 +1,7 @@
 from flask import render_template, request, url_for, redirect
-from flask_login import login_required, current_user
+from flask_login import current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.scripts.models import Script
 from application.scripts.forms import ScriptForm
 from application.auth.models import User
@@ -17,7 +17,7 @@ def script_list():
 
 
 @app.route("/scripts/new/", methods=["GET"])
-@login_required
+@login_required()
 def script_form():
     return render_template("scripts/new.html", form = ScriptForm())
 
@@ -37,7 +37,7 @@ def script_show(script_id):
 
 
 @app.route("/scripts/<script_id>/delete_comment/<comment_id>", methods=["GET"])
-@login_required
+@login_required()
 def comment_delete(script_id, comment_id):
     c = Comment.query.get(comment_id)
     if not c:
@@ -54,7 +54,7 @@ def comment_delete(script_id, comment_id):
 # POST methods
 
 @app.route("/scripts/", methods=["POST"])
-@login_required
+@login_required()
 def script_create():
     form = ScriptForm(request.form)
 
@@ -81,7 +81,7 @@ def script_create():
 
 
 @app.route("/scripts/<script_id>/", methods=["POST"])
-@login_required
+@login_required()
 def script_modify(script_id):
     s = Script.query.get(script_id)
     s.content = request.form.get("content")
@@ -91,7 +91,7 @@ def script_modify(script_id):
 
 
 @app.route("/scripts/<script_id>/delete", methods=["POST"])
-@login_required
+@login_required()
 def script_delete(script_id):
     s = Script.query.get(script_id)
     if not s:
@@ -107,7 +107,7 @@ def script_delete(script_id):
 
 
 @app.route("/scripts/<script_id>/comment", methods=["POST"])
-@login_required
+@login_required()
 def comment_create(script_id):
     form = CommentForm(request.form)
 

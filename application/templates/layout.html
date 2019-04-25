@@ -3,35 +3,54 @@
   <head>
     <meta charset="utf-8">
     <title>Scribase</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {% block style %}
     
     {% endblock %}
   </head>
 
   <body>
-    {% if current_user.is_authenticated %}
-    <p>
-      Logged in as {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Log out</a>
-    </p>
-    {% else %}
-    <a href="{{ url_for('auth_login') }}">Log in</a>
-    {% endif %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      <a class="navbar-brand" href="/">Scribase</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('script_list') }}">Scripts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('script_form') }}">Add a script</a>
+          </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('my_page') }}">My page</a>
+          </li>
+          {% endif %}
+        </ul>
+        <div class="form-inline mt-2 mt-md-0">
+          {% if current_user.is_authenticated %}
+          <a class="btn btn-secondary my-2" class="nav-item" href="{{ url_for('my_page') }}">Welcome, {{ current_user.username }}</a>&nbsp;&nbsp;
+          <a class="btn btn-primary my-2" href="{{ url_for('auth_logout') }}">Logout</a>
+          {% else %}
+          <a class="btn btn-secondary my-2" href="{{ url_for('user_create') }}">Sign up</a>&nbsp;&nbsp;
+          <a class="btn btn-primary my-2" href="{{ url_for('auth_login') }}">Login</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
     
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="{{ url_for('script_list') }}">List scripts</a></li>
-      {% if not current_user.is_authenticated %}
-      <li><a href="{{ url_for('user_create') }}">Create a new account</a></li>
-      {% else %}
-      <li><a href="{{ url_for('script_form') }}">Add a script</a></li>
-      <li><a href="{{ url_for('my_page') }}">My page</a></li>
-      {% endif %}
-    </ul>
+    <main role="main" class="container">
+      {% block body %}
+        <p>
+          Content.
+        </p>
+      {% endblock %}
+    </main>
     
-    {% block body %}
-      <p>
-        Content.
-      </p>
-    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

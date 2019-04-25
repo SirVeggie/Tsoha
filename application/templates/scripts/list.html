@@ -4,11 +4,13 @@
 <table>
   <tr>
     <th>Script</th>
+    <th style="white-space: pre;">       </th>
     <th>Language</th>
   </tr>
   {% for script in scripts %}
   <tr>
     <td><a href="/scripts/{{ script.id }}">{{ script.name }}</a></td>
+    <td></td>
     <td>{{ script.language }}</td>
   </tr>
   {% endfor %}

@@ -5,7 +5,13 @@ A place where you can upload scripts in any language that you think is or could 
 ## Links
 ### Heroku
 Find the [Heroku app](https://scribase.herokuapp.com/) here.
-Create a new account to use the app properly.
+Create a new account to use normal features.
+
+Admin account to test admin features:
+
+Username: `Admin`
+
+Password: `1234`
 
 ### Documentation
 Check the documentation for the 

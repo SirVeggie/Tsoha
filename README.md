@@ -2,8 +2,7 @@
 A database of scripts.
 A place where you can upload scripts in any language that you think is or could be useful to you or someone else.
 
-## Links
-### Heroku
+## Heroku
 Find the [Heroku app](https://scribase.herokuapp.com/) here.
 Create a new account to use normal features.
 
@@ -13,9 +12,16 @@ Username: `Admin`
 
 Password: `1234`
 
-### Documentation
+## Documentation
 Check the documentation for the 
 [Feature list](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Feature%20list.md)
 and
 [database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png).
 More will be added at a later date.
+
+### Manuals
+To install this project on your local computer follow the 
+[Installation manual](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Installation%20manual.md).
+
+For help in using the software read the 
+[User manual](https://github.com/SirVeggie/Tsoha/blob/master/documentation/User%20manual.md).

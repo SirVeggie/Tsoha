@@ -15,11 +15,11 @@ Note: use python or python3 in commands depending on your python installation.
 
 Open a command prompt in the repository's folder and input these commands:
 
-python -m venv venv
+`python -m venv venv`
 
-venv\scripts\activate
+`venv\scripts\activate`
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 The installation should now be finished.
 
@@ -28,8 +28,8 @@ Please refer to the user manual for help in running the software.
 ### Linux install
 If you're using a Linux machine, follow the previous manual installing guide but replace
 
-venv\scripts\activate
+`venv\scripts\activate`
 
 with
 
-source venv/bin/activate
+`source venv/bin/activate`

@@ -10,6 +10,7 @@ class User(Base):
 
     scripts = db.relationship("Script", backref='account', lazy=True)
     comments = db.relationship("Comment", backref='account', lazy=True)
+    userroles = db.relationship("Userrole", backref='account', lazy=True)
 
     def __init__(self, username, password):
         self.username = username
@@ -28,7 +29,13 @@ class User(Base):
         return True
 
     def roles(self):
-        roles = Userrole.query.filter_by(user_id=self.id).all()
+        stmt = text("SELECT role FROM userrole WHERE user_id = " + str(self.id))
+        res = db.engine.execute(stmt)
+
+        roles = []
+        for row in res:
+            roles.append(row[0])
+
         return roles
 
     @staticmethod
@@ -38,10 +45,6 @@ class User(Base):
                     " LEFT JOIN comment ON account.id = comment.author_id"
                     " WHERE account.id = script.author_id"
                     " OR account.id = comment.author_id")
-
-        #stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
-        #            " INNER JOIN script, comment ON account.id = script.author_id"
-        #            " OR account.id = comment.author_id")
         res = db.engine.execute(stmt)
 
         for row in res:
@@ -55,7 +58,7 @@ class Userrole(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     role = db.Column(db.String(144), nullable=False)
     user_id = db.Column(db.Integer,
-                          db.ForeignKey('user.id'),
+                          db.ForeignKey('account.id'),
                           nullable=False)
 
     def __init__(self, role, user_id):

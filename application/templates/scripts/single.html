@@ -57,6 +57,28 @@ Made with {{ script.language }}<br><br>
 
 <br><br><br>
 
+Comments:
+{% for com in commentObject %}
+<div class="comment">
+  <table class="padded">
+    <tr>
+      <td class="padded"><a href="{{ url_for('user_page', user_id=com.comment.author_id) }}">{{ com.author }}</a></td>
+      <td>{{ com.comment.title }}</td>
+    </tr>
+    <tr>
+    {% if com.comment.author_id == current_user.id or role == 'ADMIN' %}
+      <td class="padded"><a href="{{ url_for('comment_delete', script_id=script.id, comment_id=com.comment.id) }}">Delete</a></td>
+    {% else %}
+      <td></td>
+    {% endif %}
+      <td><pre>{{ com.comment.content }}</pre></td>
+    </tr>
+  </table>
+</div><br>
+{% endfor %}
+
+<br><br><br>
+
 New comment:
 <form method="POST" action="{{ url_for('comment_create', script_id=script.id) }}">
   <table>
@@ -85,24 +107,4 @@ New comment:
 </form>
 
 <br><br><br>
-
-Comments:
-{% for com in commentObject %}
-<div class="comment">
-  <table class="padded">
-    <tr>
-      <td class="padded"><a href="{{ url_for('user_page', user_id=com.comment.author_id) }}">{{ com.author }}</a></td>
-      <td>{{ com.comment.title }}</td>
-    </tr>
-    <tr>
-    {% if com.comment.author_id == current_user.id or role == 'ADMIN' %}
-      <td class="padded"><a href="{{ url_for('comment_delete', script_id=script.id, comment_id=com.comment.id) }}">Delete</a></td>
-    {% else %}
-      <td></td>
-    {% endif %}
-      <td><pre>{{ com.comment.content }}</pre></td>
-    </tr>
-  </table>
-</div><br>
-{% endfor %}
 {% endblock %}

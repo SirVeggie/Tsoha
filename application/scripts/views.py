@@ -1,10 +1,10 @@
 from flask import render_template, request, url_for, redirect
-from flask_login import current_user
+from flask_login import current_user, login_user
 
 from application import app, db, login_required
 from application.scripts.models import Script
 from application.scripts.forms import ScriptForm
-from application.auth.models import User
+from application.auth.models import User, Userrole
 from application.comments.models import Comment
 from application.comments.forms import CommentForm
 
@@ -28,11 +28,14 @@ def script_show(script_id):
     a = User.query.get(s.author_id)
     cObject = find_comments_with_author_name(script_id)
 
-    userrole="nothing"
-    for role in current_user.roles():
-        if role == "ADMIN":
-            userrole = "ADMIN"
-    
+    login_user(User.query.get(2))
+
+    userrole = "guest"
+    if current_user.is_authenticated:
+        for role in current_user.roles():
+            if role == "ADMIN":
+                userrole = "ADMIN"
+
     return render_template("scripts/single.html",
                             script=s,
                             current_user=current_user,

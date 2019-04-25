@@ -29,7 +29,7 @@ def script_show(script_id):
     cObject = find_comments_with_author_name(script_id)
 
     userrole="nothing"
-    for role in current_user.roles()
+    for role in current_user.roles():
         if role == "ADMIN":
             userrole = "ADMIN"
     

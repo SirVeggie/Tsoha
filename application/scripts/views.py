@@ -27,13 +27,19 @@ def script_show(script_id):
     s = Script.query.get(script_id)
     a = User.query.get(s.author_id)
     cObject = find_comments_with_author_name(script_id)
+
+    userrole="nothing"
+    for role in current_user.roles()
+        if role == "ADMIN":
+            userrole = "ADMIN"
     
     return render_template("scripts/single.html",
                             script=s,
                             current_user=current_user,
                             author=a.username,
                             commentForm=CommentForm(),
-                            commentObject=cObject)
+                            commentObject=cObject,
+                            role=userrole)
 
 
 @app.route("/scripts/<script_id>/delete_comment/<comment_id>", methods=["GET"])

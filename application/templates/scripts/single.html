@@ -31,7 +31,7 @@ pre.code {
 {% block body %}
 <span style="font-size: 40px;">{{ script.name }}</span>
 
-{% if current_user.id == script.author_id %}
+{% if current_user.id == script.author_id or role == 'ADMIN' %}
 <form method="POST" action="{{ url_for('script_delete', script_id=script.id) }}">
   <input type="submit" value="Delete"/>
 </form>
@@ -47,7 +47,7 @@ Made with {{ script.language }}<br><br>
 </div>
 </pre>
 
-{% if current_user.id == script.author_id %}
+{% if current_user.id == script.author_id or role == 'ADMIN' %}
 <br><br>
 <form method="POST" action="{{ url_for('script_modify', script_id=script.id) }}">
   Edit content: <br><textarea rows="5" cols="60" name="content">{{ script.content }}</textarea><br><br>
@@ -95,7 +95,7 @@ Comments:
       <td>{{ com.comment.title }}</td>
     </tr>
     <tr>
-    {% if com.comment.author_id == current_user.id %}
+    {% if com.comment.author_id == current_user.id or role == 'ADMIN' %}
       <td class="padded"><a href="{{ url_for('comment_delete', script_id=script.id, comment_id=com.comment.id) }}">Delete</a></td>
     {% else %}
       <td></td>

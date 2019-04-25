@@ -26,10 +26,10 @@ User can delete only their own comments
 
 User can view other users' user info pages
 
+Admin users can delete other users' posts and comments
+
 ## Planned features
 User can favourite scripts to find them easily
-
-Admin users can delete other users' posts and comments
 
 ## Possible features of this project
 Categories

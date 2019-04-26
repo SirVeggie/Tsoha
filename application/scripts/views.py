@@ -28,8 +28,6 @@ def script_show(script_id):
     a = User.query.get(s.author_id)
     cObject = find_comments_with_author_name(script_id)
 
-    login_user(User.query.get(2))
-
     userrole = "guest"
     if current_user.is_authenticated:
         for role in current_user.roles():

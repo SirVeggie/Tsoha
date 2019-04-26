@@ -10,14 +10,12 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///scripts.db"
     app.config["SQLALCHEMY_ECHO"] = True
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 
 db = SQLAlchemy(app)
 
 
 #Login
-from application.auth.models import User
+from application.auth.models import User, Userrole
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
@@ -77,7 +75,23 @@ from application.comments import views
 from application.users import views
 
 
+
 try:
     db.create_all()
 except:
     pass
+
+
+
+u = User.query.filter_by(username="Admin").first()
+if not u:
+    u = User(username="Admin", password="1234")
+
+    db.session().add(u)
+    db.session().commit()
+
+    u = User.query.filter_by(username="Admin").first()
+    ur = Userrole("ADMIN", u.id)
+
+    db.session().add(ur)
+    db.session().commit()

@@ -79,6 +79,7 @@ Comments:
 
 <br><br><br>
 
+{% if current_user.is_authenticated %}
 New comment:
 <form method="POST" action="{{ url_for('comment_create', script_id=script.id) }}">
   <table>
@@ -105,6 +106,7 @@ New comment:
     </tr>
   </table>
 </form>
+{% endif %}
 
 <br><br><br>
 {% endblock %}

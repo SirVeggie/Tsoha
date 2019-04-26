@@ -14,12 +14,12 @@ def auth_login():
 
     if not form.validate():
         return render_template("auth/login.html", form = form,
-                                error="- No such username or password -")
+                                error="- Wrong username or password -")
     
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
         return render_template("auth/login.html", form = form,
-                                error = "- No such username or password -")
+                                error = "- Wrong username or password -")
                 
     login_user(user)
     return redirect(url_for("index"))
@@ -41,7 +41,7 @@ def user_create():
 
     if not form.validate():
         return render_template("auth/sign-in.html", form = form, 
-                            error = "- Name has to be at least 3 characters long -")
+                            error = "- Name and password have to be 3-20 characters long -")
 
     u = User.query.filter_by(username=form.username.data).all()
     if u:

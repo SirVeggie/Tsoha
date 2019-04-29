@@ -7,6 +7,7 @@ from application.scripts.forms import ScriptForm
 from application.auth.models import User, Userrole
 from application.comments.models import Comment
 from application.comments.forms import CommentForm
+from application.favourites.models import Favourite
 
 
 # GET methods
@@ -29,10 +30,17 @@ def script_show(script_id):
     cObject = find_comments_with_author_name(script_id)
 
     userrole = "guest"
+    if current_user.is_authenticated and current_user.is_admin:
+        userrole = "ADMIN"
+
     if current_user.is_authenticated:
-        for role in current_user.roles():
-            if role == "ADMIN":
-                userrole = "ADMIN"
+        f = Favourite.query.filter_by(user_id=current_user.id, script_id=script_id).first()
+        if f:
+            favourited = True
+        else:
+            favourited = False
+    else:
+        favourited = False
 
     return render_template("scripts/single.html",
                             script=s,
@@ -40,7 +48,8 @@ def script_show(script_id):
                             author=a.username,
                             commentForm=CommentForm(),
                             commentObject=cObject,
-                            role=userrole)
+                            role=userrole,
+                            favourited=favourited)
 
 
 @app.route("/scripts/<script_id>/delete_comment/<comment_id>", methods=["GET"])
@@ -104,7 +113,7 @@ def script_delete(script_id):
     if not s:
         return redirect(url_for("script_list"))
 
-    if s.author_id != current_user.id:
+    if s.author_id != current_user.id and not current_user.is_admin:
         return redirect(url_for("script_list"))
     
     delete_comments_on_script(script_id)
@@ -130,6 +139,36 @@ def comment_create(script_id):
     db.session().commit()
 
     return redirect(url_for("script_show", script_id=script_id))
+
+
+@app.route("/scripts/<script_id>/favourite", methods=["POST"])
+@login_required()
+def favourite(script_id):
+    f = Favourite.query.filter_by(user_id=current_user.id, script_id=script_id).first()
+    s = Script.query.get(script_id)
+    if f or int(s.author_id) == int(current_user.id):
+        return redirect(url_for("script_show", script_id=script_id))
+
+    f = Favourite(current_user.id, script_id)
+
+    db.session().add(f)
+    db.session().commit()
+
+    return redirect(url_for("script_show", script_id=script_id))
+
+
+@app.route("/scripts/<script_id>/unfavourite", methods=["POST"])
+@login_required()
+def unfavourite(script_id):
+    f = Favourite.query.filter_by(user_id=current_user.id, script_id=script_id).first()
+    if not f:
+        return redirect(url_for("script_show", script_id=script_id))
+
+    db.session().delete(f)
+    db.session().commit()
+
+    return redirect(url_for("script_show", script_id=script_id))
+    
 
 
 

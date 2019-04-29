@@ -36,6 +36,17 @@ pre.code {
   <input type="submit" value="Delete"/>
 </form>
 {% endif %}
+{% if current_user.is_authenticated and script.author_id != current_user.id %}
+{% if not favourited %}
+<form method="POST" action="{{ url_for('favourite', script_id=script.id) }}">
+  <input type="submit" value="Favourite"/>
+</form>
+{% else %}
+<form method="POST" action="{{ url_for('unfavourite', script_id=script.id) }}">
+  <input type="submit" value="Unfavourite"/>
+</form>
+{% endif %}
+{% endif %}
 
 <br><br>
 by: <a href="{{ url_for('user_page', user_id=script.author_id) }}">{{ author }}</a><br><br>

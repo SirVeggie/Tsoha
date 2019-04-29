@@ -2,7 +2,7 @@
 
 {% block body %}
 <h1>{{ user.username }}</h1>
-My scripts:
+User scripts:
 <table>
   <tr>
     <th>Script</th>
@@ -20,7 +20,27 @@ My scripts:
 
 <br><br>
 
-My comments:
+{% if current_user.id == user.id %}
+User favourites:
+<table>
+  <tr>
+    <th>Script</th>
+    <th style="white-space: pre;">       </th>
+    <th>Language</th>
+  </tr>
+  {% for fav in favourites %}
+  <tr>
+    <td><a href="/scripts/{{ fav.id }}">{{ fav.name }}</a></td>
+    <td></td>
+    <td>{{ fav.language }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br><br>
+{% endif %}
+
+User comments:
 <table>
   <tr>
     <th>Title</th>

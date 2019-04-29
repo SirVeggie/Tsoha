@@ -11,6 +11,7 @@ class User(Base):
     scripts = db.relationship("Script", backref='account', lazy=True)
     comments = db.relationship("Comment", backref='account', lazy=True)
     userroles = db.relationship("Userrole", backref='account', lazy=True)
+    favourites = db.relationship("Favourite", backref='account', lazy=True)
 
     def __init__(self, username, password):
         self.username = username
@@ -37,6 +38,13 @@ class User(Base):
             roles.append(row[0])
 
         return roles
+    
+    def is_admin(self):
+        for role in self.roles():
+            if role == "ADMIN":
+                return True
+        
+        return False
 
     @staticmethod
     def number_of_active_users():

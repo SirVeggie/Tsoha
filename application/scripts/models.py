@@ -8,6 +8,9 @@ class Script(Base):
     author_id = db.Column(db.Integer,
                           db.ForeignKey('account.id'),
                           nullable=False)
+    
+    comments = db.relationship("Comment", backref='script', lazy=True)
+    favourites = db.relationship("Favourite", backref='script', lazy=True)
 
     def __init__(self, name, language, content):
         self.name = name

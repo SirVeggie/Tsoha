@@ -23,12 +23,9 @@ def my_page():
 
 @app.route("/users/<user_id>", methods=["GET"])
 def user_page(user_id):
-    print("\n\n")
-    print(current_user.id)
-    print(user_id)
-    print("\n\n")
-    if int(current_user.id) == int(user_id):
-        return redirect(url_for("my_page"))
+    if current_user.is_authenticated:
+        if int(current_user.id) == int(user_id):
+            return redirect(url_for("my_page"))
 
     scripts = Script.query.filter_by(author_id=user_id).all()
     comments = Comment.query.filter_by(author_id=user_id).all()

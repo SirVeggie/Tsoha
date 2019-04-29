@@ -30,8 +30,8 @@ def script_show(script_id):
     cObject = find_comments_with_author_name(script_id)
 
     userrole = "guest"
-    if current_user.is_authenticated and current_user.is_admin:
-        userrole = "ADMIN"
+    if current_user.is_authenticated and current_user.is_admin():
+            userrole = "ADMIN"
 
     if current_user.is_authenticated:
         f = Favourite.query.filter_by(user_id=current_user.id, script_id=script_id).first()
@@ -113,7 +113,7 @@ def script_delete(script_id):
     if not s:
         return redirect(url_for("script_list"))
 
-    if s.author_id != current_user.id and not current_user.is_admin:
+    if s.author_id != current_user.id and not current_user.is_admin():
         return redirect(url_for("script_list"))
     
     delete_comments_on_script(script_id)

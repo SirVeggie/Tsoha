@@ -29,14 +29,15 @@ pre.code {
 
 
 {% block body %}
-<span style="font-size: 40px;">{{ script.name }}</span>
-
-{% if current_user.id == script.author_id or role == 'ADMIN' %}
 <form method="POST" action="{{ url_for('script_delete', script_id=script.id) }}">
-  <input type="submit" value="Delete"/>
-</form>
+<span style="font-size: 40px;">{{ script.name }}</span>
+{% if current_user.id == script.author_id or role == 'ADMIN' %}
+  &nbsp;&nbsp;&nbsp;<input type="submit" value="Delete"/>
 {% endif %}
+</form>
+
 {% if current_user.is_authenticated and script.author_id != current_user.id %}
+<br>
 {% if not favourited %}
 <form method="POST" action="{{ url_for('favourite', script_id=script.id) }}">
   <input type="submit" value="Favourite"/>

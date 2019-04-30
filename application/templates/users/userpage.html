@@ -6,7 +6,7 @@ User scripts:
 <table>
   <tr>
     <th>Script</th>
-    <th style="white-space: pre;">       </th>
+    <th class="pre">       </th>
     <th>Language</th>
   </tr>
   {% for script in scripts %}
@@ -25,7 +25,7 @@ User favourites:
 <table>
   <tr>
     <th>Script</th>
-    <th style="white-space: pre;">       </th>
+    <th class="pre">       </th>
     <th>Language</th>
   </tr>
   {% for fav in favourites %}
@@ -44,18 +44,18 @@ User comments:
 <table>
   <tr>
     <th>Title</th>
-    <th style="white-space: pre;">       </th>
+    <th class="pre">       </th>
     <th>Comment</th>
-    <th style="white-space: pre;">       </th>
+    <th class="pre">       </th>
     <th>Location</th>
-    <th style="white-space: pre;">       </th>
+    <th class="pre">       </th>
     <th>Date created</th>
   </tr>
   {% for comment in comments %}
   <tr>
-    <td>{{ comment.title }}</td>
+    <td style="font-size: 20px;">{{ comment.title }}</td>
     <td></td>
-    <td><pre>{{ comment.content }}</pre></td>
+    <td class="pre">{{ comment.content }}</td>
     <td></td>
     <td><a href="/scripts/{{ comment.script_id }}">Here</a></td>
     <td></td>

@@ -105,7 +105,7 @@ def script_modify(script_id):
     s.content = request.form.get("content")
     db.session().commit()
 
-    return redirect("/scripts" + str(script_id) + "/")
+    return redirect(url_for("script_show", script_id=script_id))
 
 
 @app.route("/scripts/<script_id>/delete/", methods=["POST"])
@@ -113,6 +113,8 @@ def script_modify(script_id):
 def script_delete(script_id):
     if not validate_script_id(script_id):
         return redirect(url_for("script_list"))
+
+    s = Script.query.get(script_id)
     
     if s.author_id != current_user.id and not current_user.is_admin():
         return redirect(url_for("script_list"))

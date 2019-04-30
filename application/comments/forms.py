@@ -10,7 +10,7 @@ class CommentForm(FlaskForm):
                                     
     content = TextAreaField("content", [validators.Regexp('\w+'
                                         , message='- Content must not be empty -')
-                                    , validators.Length(max=500
+                                    , validators.Length(max=2000
                                         , message='- Content is too long -')])
 
     class Meta:

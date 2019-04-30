@@ -47,7 +47,7 @@ class User(Base):
         return False
 
     @staticmethod
-    def number_of_active_users():
+    def number_of_contributing_users():
         stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
                     " LEFT JOIN script ON account.id = script.author_id"
                     " LEFT JOIN comment ON account.id = comment.author_id"

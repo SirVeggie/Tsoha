@@ -4,7 +4,7 @@ from application.auth.models import User
 
 @app.route("/")
 def index():
-    return render_template("index.html", active_count=User.number_of_active_users())
+    return render_template("index.html", active_count=User.number_of_contributing_users())
 
 @app.errorhandler(404)
 def handler_404(e):

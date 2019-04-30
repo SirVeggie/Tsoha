@@ -20,8 +20,12 @@ class SigninForm(FlaskForm):
                                      , validators.Regexp('^\w*$'
                                         , message='- Only numbers and letters allowed -')
                                      , user_exists_check])
-    password = PasswordField("Password", [validators.Length(min=3
-                                        , message='- Password has to be at least 3 characters long -')])
+
+                                     
+    password = PasswordField("Password" , [validators.Length(min=3
+                                            , message='- Password has to be at least 3 characters long -')
+                                        , validators.Length(max=50
+                                            , message='- Password is too long -')])
 
     class Meta:
         csrf = False

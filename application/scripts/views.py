@@ -25,6 +25,9 @@ def script_form():
 
 @app.route("/scripts/<script_id>/", methods=["GET"])
 def script_show(script_id):
+    if not validate_script_id(script_id):
+        return render_template("errors/error404.html")
+    
     s = Script.query.get(script_id)
     a = User.query.get(s.author_id)
     cObject = find_comments_with_author_name(script_id)
@@ -52,9 +55,12 @@ def script_show(script_id):
                             favourited=favourited)
 
 
-@app.route("/scripts/<script_id>/delete_comment/<comment_id>", methods=["GET"])
+@app.route("/scripts/<script_id>/delete_comment/<comment_id>/", methods=["GET"])
 @login_required()
 def comment_delete(script_id, comment_id):
+    if not validate_script_id(script_id):
+        return render_template("errors/error404.html")
+    
     c = Comment.query.get(comment_id)
     if not c:
         return redirect(url_for("script_show", script_id=script_id))
@@ -75,14 +81,7 @@ def script_create():
     form = ScriptForm(request.form)
 
     if not form.validate():
-        return render_template("scripts/new.html", form = form, 
-                        error = "- Name must be at least 5 characters long -\n"
-                              + "- Language and content must not be empty -")
-    
-    s = Script.query.filter_by(name=form.name.data).all()
-    if s:
-        return render_template("scripts/new.html", form = form, 
-                        error = "- A script by that name already exists -")
+        return render_template("scripts/new.html", form = form)
 
     s = Script(form.name.data,
             form.language.data,
@@ -99,32 +98,39 @@ def script_create():
 @app.route("/scripts/<script_id>/", methods=["POST"])
 @login_required()
 def script_modify(script_id):
+    if not validate_script_id(script_id):
+        return redirect(url_for("script_list"))
+    
     s = Script.query.get(script_id)
     s.content = request.form.get("content")
     db.session().commit()
 
-    return redirect("/scripts/" + str(script_id) + "/")
+    return redirect("/scripts" + str(script_id) + "/")
 
 
-@app.route("/scripts/<script_id>/delete", methods=["POST"])
+@app.route("/scripts/<script_id>/delete/", methods=["POST"])
 @login_required()
 def script_delete(script_id):
-    s = Script.query.get(script_id)
-    if not s:
+    if not validate_script_id(script_id):
         return redirect(url_for("script_list"))
-
+    
     if s.author_id != current_user.id and not current_user.is_admin():
         return redirect(url_for("script_list"))
     
+    s = Script.query.get(script_id)
+
     delete_comments_on_script(script_id)
     db.session().delete(s)
     db.session().commit()
     return redirect(url_for("script_list"))
 
 
-@app.route("/scripts/<script_id>/comment", methods=["POST"])
+@app.route("/scripts/<script_id>/comment/", methods=["POST"])
 @login_required()
 def comment_create(script_id):
+    if not validate_script_id(script_id):
+        return redirect(url_for("script_list"))
+    
     form = CommentForm(request.form)
 
     if not form.validate():
@@ -141,9 +147,12 @@ def comment_create(script_id):
     return redirect(url_for("script_show", script_id=script_id))
 
 
-@app.route("/scripts/<script_id>/favourite", methods=["POST"])
+@app.route("/scripts/<script_id>/favourite/", methods=["POST"])
 @login_required()
 def favourite(script_id):
+    if not validate_script_id(script_id):
+        return redirect(url_for("script_list"))
+    
     f = Favourite.query.filter_by(user_id=current_user.id, script_id=script_id).first()
     s = Script.query.get(script_id)
     if f or int(s.author_id) == int(current_user.id):
@@ -157,9 +166,12 @@ def favourite(script_id):
     return redirect(url_for("script_show", script_id=script_id))
 
 
-@app.route("/scripts/<script_id>/unfavourite", methods=["POST"])
+@app.route("/scripts/<script_id>/unfavourite/", methods=["POST"])
 @login_required()
 def unfavourite(script_id):
+    if not validate_script_id(script_id):
+        return redirect(url_for("script_list"))
+    
     f = Favourite.query.filter_by(user_id=current_user.id, script_id=script_id).first()
     if not f:
         return redirect(url_for("script_show", script_id=script_id))
@@ -173,6 +185,18 @@ def unfavourite(script_id):
 
 
 #Methods
+def validate_script_id(script_id):
+    try:
+        script_id = int(script_id)
+    except:
+        return False
+    
+    s = Script.query.get(script_id)
+    if not s:
+        return False
+    
+    return True
+
 def find_comments_with_author_name(script_id):
     comments = Comment.query.filter_by(script_id=script_id).all()
 

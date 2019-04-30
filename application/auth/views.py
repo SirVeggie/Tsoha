@@ -1,11 +1,11 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.auth.models import User, Userrole
-from application.auth.forms import LoginForm
+from application.auth.forms import LoginForm, SigninForm
 
-@app.route("/auth/login", methods = ["GET", "POST"])
+@app.route("/auth/login/", methods = ["GET", "POST"])
 def auth_login():
     if request.method == "GET":
         return render_template("auth/login.html", form = LoginForm())
@@ -13,40 +13,30 @@ def auth_login():
     form = LoginForm(request.form)
 
     if not form.validate():
-        return render_template("auth/login.html", form = form,
-                                error="- Wrong username or password -")
+        return render_template("auth/login.html", form = form)
     
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
-    if not user:
-        return render_template("auth/login.html", form = form,
-                                error = "- Wrong username or password -")
                 
     login_user(user)
     return redirect(url_for("index"))
 
-@app.route("/auth/logout")
+@app.route("/auth/logout/")
 def auth_logout():
     logout_user()
     return redirect(url_for("index"))
 
-@app.route("/auth/sign-in", methods = ["GET", "POST"])
+@app.route("/auth/sign-in/", methods = ["GET", "POST"])
 def user_create():
     if current_user.is_authenticated:
         return redirect("/")
 
     if request.method == "GET":
-        return render_template("auth/sign-in.html", form = LoginForm())
+        return render_template("auth/sign-in.html", form = SigninForm())
 
-    form = LoginForm(request.form)
+    form = SigninForm(request.form)
 
     if not form.validate():
-        return render_template("auth/sign-in.html", form = form, 
-                            error = "- Name and password have to be 3-20 characters long -")
-
-    u = User.query.filter_by(username=form.username.data).all()
-    if u:
-        return render_template("auth/sign-in.html", form = form, 
-                            error = "- A user by that name already exists -")
+        return render_template("auth/sign-in.html", form = form)
 
     u = User(form.username.data,
             form.password.data)
@@ -58,11 +48,9 @@ def user_create():
 
     return redirect(url_for("index"))
 
-@app.route("/auth/grant_admin", methods = ["GET"])
+@app.route("/auth/grant_admin/", methods = ["GET"])
+@login_required()
 def grant_admin():
-    if not current_user.is_authenticated:
-        return redirect("/")
-    
     ur = Userrole.query.filter_by(role="ADMIN", user_id=current_user.id).first()
     if ur:
         return redirect("/")

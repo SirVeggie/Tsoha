@@ -1,33 +1,5 @@
 {% extends "layout.html" %}
 
-{% block style %}
-<style>
-div.indented {
-  position: relative;
-  left: 15px;
-}
-
-div.comment {
-  background-color: #DCDCDC;
-}
-
-table.padded {
-  padding: 10px
-}
-td.padded {
-  text-align: center;
-  padding: 10px;
-}
-
-pre.code {
-  background-color: #DCDCDC;
-  width: 70%;
-}
-</style>
-{% endblock %}
-
-
-
 {% block body %}
 <form method="POST" action="{{ url_for('script_delete', script_id=script.id) }}">
 <span style="font-size: 40px;">{{ script.name }}</span>
@@ -75,7 +47,7 @@ Comments:
   <table class="padded">
     <tr>
       <td class="padded"><a href="{{ url_for('user_page', user_id=com.comment.author_id) }}">{{ com.author }}</a></td>
-      <td>{{ com.comment.title }}</td>
+      <td style="font-size: 24px;">{{ com.comment.title }}</td>
     </tr>
     <tr>
     {% if com.comment.author_id == current_user.id or role == 'ADMIN' %}
@@ -83,7 +55,7 @@ Comments:
     {% else %}
       <td></td>
     {% endif %}
-      <td><pre>{{ com.comment.content }}</pre></td>
+      <td style="white-space: pre-wrap;">{{ com.comment.content }}</td>
     </tr>
   </table>
 </div><br>
@@ -97,7 +69,7 @@ New comment:
   <table>
     <tr>
       <td>
-        <span style="white-space: pre;">{{ commentForm.title.label }}           </span>
+        <span class="pre">{{ commentForm.title.label }}           </span>
       </td>
       <td>
         {{ commentForm.title }}

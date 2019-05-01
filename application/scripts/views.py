@@ -85,9 +85,8 @@ def script_create():
 
     s = Script(form.name.data,
             form.language.data,
-            form.content.data)
-    s.author_id = current_user.id
-    
+            form.content.data,
+            current_user.id)
 
     db.session().add(s)
     db.session().commit()
@@ -139,9 +138,9 @@ def comment_create(script_id):
         return redirect(url_for("script_show", script_id=script_id))
     
     c = Comment(form.title.data,
-                form.content.data)
-    c.author_id = current_user.id
-    c.script_id = script_id
+                form.content.data,
+                current_user.id,
+                script_id)
 
     db.session().add(c)
     db.session().commit()

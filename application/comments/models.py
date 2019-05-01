@@ -11,8 +11,10 @@ class Comment(Base):
                           db.ForeignKey('script.id'),
                           nullable=False)
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, author_id, script_id):
         self.title = title
         self.content = content
+        self.author_id = author_id
+        self.script_id = script_id
 
     

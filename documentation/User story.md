@@ -10,6 +10,8 @@ User can see how many contributing users there are
 
 User can view their own user info page
 
+User can view other users' less detailed user info pages
+
 User can create a new script
 
 User can modify only their own created scripts
@@ -23,8 +25,6 @@ User can view individual scripts
 User can comment on scripts
 
 User can delete only their own comments
-
-User can view other users' user info pages
 
 Admin users can delete other users' posts and comments
 

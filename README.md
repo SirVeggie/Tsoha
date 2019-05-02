@@ -14,7 +14,7 @@ Password: `1234`
 
 ## Documentation
 Check the documentation for the 
-[Feature list](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Feature%20list.md)
+[User stories](https://github.com/SirVeggie/Tsoha/blob/master/documentation/User%20story.md)
 and
 [database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png).
 More will be added at a later date.

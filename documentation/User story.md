@@ -1,4 +1,4 @@
-# Feature list
+# User stories
 ## Current features
 User can create an account
 
@@ -28,12 +28,13 @@ User can view other users' user info pages
 
 Admin users can delete other users' posts and comments
 
-## Planned features
 User can favourite scripts to find them easily
 
-## Possible features of this project
-Categories
+## User stories that couldn't be completed
+Scripts are divided into categories
 
-Search function
+User can search for scripts
 
-Revision system; post possible changes to enhance an already existing script, or link your own version with the original
+User can sort scripts
+
+User can suggest changes to someone elses script through the system

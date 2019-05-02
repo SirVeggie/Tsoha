@@ -30,6 +30,8 @@ Admin users can delete other users' posts and comments
 
 User can favourite scripts to find them easily
 
+Inputs are validated so that a user cannot accidentally break the system
+
 ## User stories that couldn't be completed
 Scripts are divided into categories
 

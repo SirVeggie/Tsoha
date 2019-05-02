@@ -6,7 +6,7 @@ User can log in
 
 User can log out
 
-User can see how many active users there are
+User can see how many contributing users there are
 
 User can view their own user info page
 

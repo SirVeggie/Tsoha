@@ -26,6 +26,8 @@ User can comment on scripts
 
 User can delete only their own comments
 
+User can edit their own comments
+
 Admin users can delete other users' posts and comments
 
 User can favourite scripts to find them easily

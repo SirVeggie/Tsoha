@@ -21,7 +21,7 @@ class ScriptForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    parameter = StringField("Search", [validators.Regexp('\w*'
+    parameter = StringField("Search", [validators.Regexp('^\w*$'
                                         , message='- Only normal letters, numbers and _ -')
                                     , validators.Length(max=50
                                         , message='- Name is too long -')])

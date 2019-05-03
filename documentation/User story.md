@@ -54,6 +54,14 @@ Related SQL query:
 INSERT INTO account(username,password) VALUES ( (form_username),(form_password) );
 ```
 
+**Anyone can view another user's less detailed user info page**
+```sql
+Related SQL query:
+User | SELECT * FROM account WHERE account.id = (user_id);
+User's scripts | SELECT * FROM script WHERE script.author_id = (user_id);
+User's comments | SELECT * FROM comment WHERE comment.author_id = (user_id);
+```
+
 ### Features for those who have an account
 **User can log in**
 ```sql
@@ -74,12 +82,6 @@ User | SELECT * FROM account WHERE account.id = (current_user.id);
 User's scripts | SELECT * FROM script WHERE script.author_id = (current_user.id);
 User's favourites | SELECT script.* FROM script, favourite WHERE script.id = favourite.script_id AND favourite.user_id = (current_user.id);
 User's comments | SELECT * FROM comment WHERE comment.author_id = (current_user.id);
-```
-
-**User can view other user's less detailed user info page**
-```sql
-Related SQL query:
-SELECT * FROM account WHERE account.id = (user_id);
 ```
 
 **User can create a new script**

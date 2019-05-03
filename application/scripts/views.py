@@ -196,8 +196,8 @@ def validate_script_id(script_id):
 
 def search_scripts(param):
     stmt = text("SELECT * FROM script "
-                "WHERE script.name LIKE \"%" + str(param) +
-                "%\' OR script.language LIKE \"%" + str(param) + "%\'")
+                "WHERE script.name LIKE \'%" + str(param) +
+                "%\' OR script.language LIKE \'%" + str(param) + "%\'")
     res = db.engine.execute(stmt)
 
     return res

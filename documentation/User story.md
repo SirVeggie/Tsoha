@@ -6,12 +6,6 @@
 
 ## Current features
 ### Features available to everyone
-**Anyone can view the home page**
-```sql
-Related SQL query:
--
-```
-
 **Anyone can see the amount of contributing users**
 ```sql
 Related SQL query:

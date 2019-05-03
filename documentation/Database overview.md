@@ -50,3 +50,6 @@ CREATE TABLE favourite (
   FOREIGN KEY(script_id) REFERENCES script (id)
 );
 ```
+
+
+![Database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png)

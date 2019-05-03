@@ -1,22 +1,34 @@
 # User stories
 ## Current features
-User can create an account
+### Features available to everyone
+Anyone can view the home page
 
+Anyone can see the amount of contributing users
+
+Anyone can see the top contributor
+
+Anyone can see the amount of scripts the top contributor has posted
+
+Anyone can browse scripts
+
+Anyone can browse scripts' comments
+
+Anyone can create an account
+
+### Features for those who have an account
 User can log in
 
 User can log out
 
-User can see how many contributing users there are
-
 User can view their own user info page
 
-User can view other users' less detailed user info pages
+User can view other user's less detailed user info page
 
 User can create a new script
 
-User can modify only their own created scripts
+User can modify their own created scripts
 
-User can delete only their own created scripts
+User can delete their own created scripts
 
 User can list all scripts
 
@@ -28,11 +40,14 @@ User can delete only their own comments
 
 User can edit their own comments
 
-Admin users can delete other users' posts and comments
-
 User can favourite scripts to find them easily
 
-Inputs are validated so that a user cannot accidentally break the system
+### Features for admins
+Admin user can delete any post
+
+Admin user can delete any comment
+
+Admin user can modify any comment
 
 ## User stories that couldn't be completed
 Scripts are divided into categories

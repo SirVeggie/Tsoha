@@ -62,7 +62,7 @@ class User(Base):
         stmt = text("SELECT account.username, COUNT(script.id) FROM account, script "
                     "WHERE account.id = script.author_id "
                     "GROUP BY username "
-                    "ORDER BY script.id")
+                    "ORDER BY COUNT(script.id) DESC")
         res = db.engine.execute(stmt)
 
         return res.first()

@@ -1,3 +1,4 @@
+```sql
 CREATE TABLE account (
   id INTEGER NOT NULL,
   date_created DATETIME,
@@ -48,3 +49,4 @@ CREATE TABLE favourite (
   FOREIGN KEY(user_id) REFERENCES account (id),
   FOREIGN KEY(script_id) REFERENCES script (id)
 );
+```

@@ -56,6 +56,12 @@ User's scripts | SELECT * FROM script WHERE script.author_id = (user_id);
 User's comments | SELECT * FROM comment WHERE comment.author_id = (user_id);
 ```
 
+**Anyone can search for scripts by name or language**
+```sql
+Related SQL query:
+SELECT * FROM script WHERE script.name LIKE '%(search_parameter)%' OR script.language LIKE '%(search_parameter)%';
+```
+
 ### Features for those who have an account
 **User can log in**
 ```sql

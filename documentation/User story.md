@@ -50,7 +50,7 @@ Admin user can delete any comment
 Admin user can modify any comment
 
 ## User stories that couldn't be completed
-Scripts are divided into categories
+User can browse scripts by categories
 
 User can search for scripts
 

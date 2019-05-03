@@ -42,24 +42,24 @@ Made with {{ script.language }}<br><br>
 <br><br><br>
 
 Comments:
-{% for com in commentObject %}
+{% for comment in comments %}
 <div class="comment">
   <table class="padded">
     <tr>
-      <td class="padded"><a href="{{ url_for('user_page', user_id=com.comment.author_id) }}">{{ com.author }}</a></td>
-      <td style="font-size: 24px;">{{ com.comment.title }}</td>
+      <td class="padded"><a href="{{ url_for('user_page', user_id=comment.author_id) }}">{{ comment.author_name }}</a></td>
+      <td style="font-size: 24px;">{{ comment.title }}</td>
     </tr>
     <tr>
-    {% if com.comment.author_id == current_user.id or role == 'ADMIN' %}
+    {% if comment.author_id == current_user.id or role == 'ADMIN' %}
       <td class="padded">
-        <a href="{{ url_for('comment_delete', comment_id=com.comment.id) }}">Delete</a>
+        <a href="{{ url_for('comment_delete', comment_id=comment.id) }}">Delete</a>
         <br>
-        <a href="{{ url_for('comment_show', comment_id=com.comment.id) }}">Edit</a>
+        <a href="{{ url_for('comment_show', comment_id=comment.id) }}">Edit</a>
       </td>
     {% else %}
       <td></td>
     {% endif %}
-      <td class="pre">{{ com.comment.content }}</td>
+      <td class="pre">{{ comment.content }}</td>
     </tr>
   </table>
 </div><br>

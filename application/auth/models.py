@@ -46,6 +46,14 @@ class User(Base):
         
         return False
 
+    def get_favourites_as_scripts(self):
+        stmt = text("SELECT script.* FROM script, favourite "
+                    "WHERE script.id = favourite.script_id "
+                    "AND favourite.user_id = " + str(self.id))
+        res = db.engine.execute(stmt)
+
+        return res
+
     @staticmethod
     def number_of_contributing_users():
         stmt = text("SELECT COUNT(DISTINCT account.id) FROM account "
@@ -66,6 +74,8 @@ class User(Base):
         res = db.engine.execute(stmt)
 
         return res.first()
+
+
 
 class Userrole(db.Model):
     __tablename__ = "userrole"

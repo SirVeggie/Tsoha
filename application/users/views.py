@@ -12,7 +12,7 @@ from application.favourites.models import Favourite
 def my_page():
     scripts = Script.query.filter_by(author_id=current_user.id).all()
     comments = Comment.query.filter_by(author_id=current_user.id).all()
-    favourites = get_favourites_as_scripts(current_user.id)
+    favourites = current_user.get_favourites_as_scripts()
     return render_template("users/userpage.html",
                             current_user=current_user,
                             user=current_user,
@@ -44,15 +44,3 @@ def user_page(user_id):
                             scripts=scripts,
                             comments=comments)
 
-
-
-#Methods
-def get_favourites_as_scripts(user_id):
-    favs = Favourite.query.filter_by(user_id=user_id).all()
-    
-    response = []
-    for f in favs:
-        s = Script.query.get(f.script_id)
-        response.append(s)
-
-    return response

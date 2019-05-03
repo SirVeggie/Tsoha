@@ -1,5 +1,6 @@
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user, login_user
+from sqlalchemy.sql import text
 
 from application import app, db, login_required
 from application.scripts.models import Script
@@ -30,7 +31,7 @@ def script_show(script_id):
     
     s = Script.query.get(script_id)
     a = User.query.get(s.author_id)
-    cObject = find_comments_with_author_name(script_id)
+    comments = find_comments_with_author_name(script_id)
 
     userrole = "guest"
     if current_user.is_authenticated and current_user.is_admin():
@@ -50,7 +51,7 @@ def script_show(script_id):
                             current_user=current_user,
                             author=a.username,
                             commentForm=CommentForm(),
-                            commentObject=cObject,
+                            comments=comments,
                             role=userrole,
                             favourited=favourited)
 
@@ -182,14 +183,12 @@ def validate_script_id(script_id):
     return True
 
 def find_comments_with_author_name(script_id):
-    comments = Comment.query.filter_by(script_id=script_id).all()
+    stmt = text("SELECT comment.*, account.username AS author_name FROM comment, account "
+                    "WHERE comment.author_id = account.id "
+                    "AND comment.script_id = " + str(script_id))
+    res = db.engine.execute(stmt)
 
-    response = []
-    for c in comments:
-        author = User.query.get(c.author_id).username
-        response.append({"comment":c, "author":author})
-    
-    return response
+    return res
 
 def delete_comments_on_script(script_id):
     coms = Comment.query.filter_by(script_id=script_id).all()

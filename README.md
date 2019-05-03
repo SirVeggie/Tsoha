@@ -17,7 +17,7 @@ Check the documentation for the
 [User stories](https://github.com/SirVeggie/Tsoha/blob/master/documentation/User%20story.md)
 and
 [database diagram](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Database%20diagram.png).
-Here are the [database tables](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Tables.txt).
+Also take a peek to the [database tables](https://github.com/SirVeggie/Tsoha/blob/master/documentation/Tables.txt).
 
 ### Manuals
 To install this project on your local computer follow the 

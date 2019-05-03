@@ -58,7 +58,10 @@ def comment_edit(comment_id):
     form = CommentForm(request.form)
 
     if not form.validate():
-        return redirect(url_for("comment_show", script_id=comment.id))
+        return render_template("comments/edit.html",
+                            comment=comment,
+                            current_user=current_user,
+                            commentForm=form)
     
     comment.title = request.form.get("title")
     comment.content = request.form.get("content")

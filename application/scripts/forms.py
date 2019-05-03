@@ -2,13 +2,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, validators
 
 class ScriptForm(FlaskForm):
-    name = StringField("Script name", [validators.Regexp('\w+'
+    name = StringField("Script name", [validators.Regexp('.*\w+.*'
                                         , message='- Name must not be empty -')
                                     , validators.Length(max=50
                                         , message='- Name is too long -')])
 
 
-    language = StringField("Language", [validators.Regexp('\w+'
+    language = StringField("Language", [validators.Regexp('.*\w+.*'
                                         , message='- Language must not be empty -')
                                     , validators.Length(max=20
                                         , message='- Language is too long -')])

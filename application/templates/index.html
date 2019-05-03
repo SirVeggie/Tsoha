@@ -15,8 +15,14 @@
   {% if active_count == 1 %}
   is {{ active_count }} active user.
   {% else %}
-  are <span style="font-size: 24px;">&nbsp;{{ active_count }}&nbsp;</span> contributing users.
+  are <span style="font-size: 24px;">&nbsp;{{ user_count }}&nbsp;</span> contributing users.
   {% endif %}
+  <br><br>
+  The top contributing user is
+  <span style="font-size: 20px;">&nbsp;{{ top_user[0] }}&nbsp;</span>
+  with
+  <span style="font-size: 20px;">&nbsp;{{ top_user[1] }}&nbsp;</span>
+  total posted scripts.
   <br><br>
   To become a contributing user, post at least one script or comment.
   

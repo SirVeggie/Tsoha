@@ -17,8 +17,20 @@
     </tr>
   </table>
 </div><br>
+{% if commentForm.title.errors or commentForm.content.errors %}
+<br>
+{% endif %}
 
+{% for error in commentForm.title.errors %}
+{{ error }}<br>
+{% endfor %}
+{% for error in commentForm.content.errors %}
+{{ error }}<br>
+{% endfor %}
 
+{% if commentForm.title.errors or commentForm.content.errors %}
+<br><br>
+{% endif %}
 <form method="POST" action="{{ url_for('comment_edit', comment_id=comment.id) }}">
   <table>
     <tr>

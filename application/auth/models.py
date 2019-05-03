@@ -48,17 +48,24 @@ class User(Base):
 
     @staticmethod
     def number_of_contributing_users():
-        stmt = text("SELECT COUNT(DISTINCT account.id) FROM account"
-                    " LEFT JOIN script ON account.id = script.author_id"
-                    " LEFT JOIN comment ON account.id = comment.author_id"
-                    " WHERE account.id = script.author_id"
-                    " OR account.id = comment.author_id")
+        stmt = text("SELECT COUNT(DISTINCT account.id) FROM account "
+                    "LEFT JOIN script ON account.id = script.author_id "
+                    "LEFT JOIN comment ON account.id = comment.author_id "
+                    "WHERE account.id = script.author_id "
+                    "OR account.id = comment.author_id")
         res = db.engine.execute(stmt)
 
-        for row in res:
-            return row[0]
-        return 0
+        return res.first()[0]
 
+    @staticmethod
+    def top_contributing_user():
+        stmt = text("SELECT account.username, COUNT(script.id) FROM account, script "
+                    "WHERE account.id = script.author_id "
+                    "GROUP BY username "
+                    "ORDER BY script.id")
+        res = db.engine.execute(stmt)
+
+        return res.first()
 
 class Userrole(db.Model):
     __tablename__ = "userrole"

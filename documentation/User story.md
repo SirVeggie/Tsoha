@@ -45,7 +45,7 @@ SELECT * FROM script WHERE script.id = (script_id);
 **Anyone can browse scripts' comments**
 ```sql
 Related SQL query:
-SELECT * FROM comment WHERE comment.scipt_id = (script_id);
+SELECT comment.*, account.username AS author_name FROM comment, account WHERE comment.author_id = account.id AND comment.script_id = (script_id);
 ```
 
 **Anyone can create an account**

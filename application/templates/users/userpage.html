@@ -11,7 +11,7 @@ User scripts:
   </tr>
   {% for script in scripts %}
   <tr>
-    <td><a href="/scripts/{{ script.id }}">{{ script.name }}</a></td>
+    <td><a href="{{ url_for('script_show', script_id=script.id) }}">{{ script.name }}</a></td>
     <td></td>
     <td>{{ script.language }}</td>
   </tr>
@@ -30,7 +30,7 @@ User favourites:
   </tr>
   {% for fav in favourites %}
   <tr>
-    <td><a href="/scripts/{{ fav.id }}">{{ fav.name }}</a></td>
+    <td><a href="{{ url_for('script_show', script_id=fav.id) }}">{{ fav.name }}</a></td>
     <td></td>
     <td>{{ fav.language }}</td>
   </tr>
@@ -47,7 +47,7 @@ User comments:
     <th class="pre">       </th>
     <th>Comment</th>
     <th class="pre">       </th>
-    <th>Location</th>
+    <th>Links</th>
     <th class="pre">       </th>
     <th>Date created</th>
   </tr>
@@ -57,9 +57,15 @@ User comments:
     <td></td>
     <td class="pre">{{ comment.content }}</td>
     <td></td>
-    <td><a href="/scripts/{{ comment.script_id }}">Here</a></td>
+    <td>
+      <a href="{{ url_for('script_show', script_id=comment.script_id) }}">Related script</a>
+      <br>
+      <a href="{{ url_for('comment_show', comment_id=comment.id) }}">Edit</a>
+    </td>
     <td></td>
-    <td>{{ comment.date_created }}</td>
+    <td>
+      {{ comment.date_created }}
+    </td>
   </tr>
   {% endfor %}
 </table>

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<a href="{{ url_for('script_show', script_id=comment.script_id) }}"><input type="submit" value="< Back to script"/></a>
+<br><br>
+<div class="comment">
+  <table class="padded">
+    <tr>
+      <td class="padded"><a href="{{ url_for('user_page', user_id=comment.author_id) }}">{{ current_user.username }}</a></td>
+      <td style="font-size: 24px;">{{ comment.title }}</td>
+    </tr>
+    <tr>
+      <td class="padded">
+        <a href="{{ url_for('comment_delete', comment_id=comment.id) }}">Delete</a>
+      </td>
+      <td class="pre">{{ comment.content }}</td>
+    </tr>
+  </table>
+</div><br>
+
+
+<form method="POST" action="{{ url_for('comment_edit', comment_id=comment.id) }}">
+  <table>
+    <tr>
+      <td>
+        <span class="pre">{{ commentForm.title.label }}           </span>
+      </td>
+      <td>
+        {{ commentForm.title }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{ commentForm.content.label }}
+      </td>
+      <td>
+        {{ commentForm.content }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Confirm edit"/>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

@@ -55,23 +55,6 @@ def script_show(script_id):
                             favourited=favourited)
 
 
-@app.route("/scripts/<script_id>/delete_comment/<comment_id>/", methods=["GET"])
-@login_required()
-def comment_delete(script_id, comment_id):
-    if not validate_script_id(script_id):
-        return render_template("errors/error404.html")
-    
-    c = Comment.query.get(comment_id)
-    if not c:
-        return redirect(url_for("script_show", script_id=script_id))
-
-    if c.author_id == current_user.id:
-        db.session().delete(c)
-        db.session().commit()
-    
-    return redirect(url_for("script_show", script_id=script_id))
-
-
 
 # POST methods
 

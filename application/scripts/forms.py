@@ -18,3 +18,13 @@ class ScriptForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+
+class SearchForm(FlaskForm):
+    parameter = StringField("Search", [validators.Regexp('\w*'
+                                        , message='- Only normal letters, numbers and _ -')
+                                    , validators.Length(max=50
+                                        , message='- Name is too long -')])
+
+    class Meta:
+        csrf = False

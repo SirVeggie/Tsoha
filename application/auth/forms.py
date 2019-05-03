@@ -18,7 +18,7 @@ class SigninForm(FlaskForm):
                                      , validators.Length(max=20
                                         , message='- Username has to be 3-20 characters long -')
                                      , validators.Regexp('^\w*$'
-                                        , message='- Only numbers and letters allowed -')
+                                        , message='- Only numbers, letters and _ allowed -')
                                      , user_exists_check])
 
                                      

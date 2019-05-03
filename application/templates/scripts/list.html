@@ -1,6 +1,24 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<form method="POST" action="{{ url_for('script_search') }}">
+  <table>
+    <tr>
+      <td>
+        <span class="pre">{{ form.parameter.label }}    </span>
+      </td>
+      <td>
+        {{ form.parameter }}
+      </td>
+      <td>
+        <input type="submit" value="Search"/>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<br><br>
+
 <table>
   <tr>
     <th>Script</th>

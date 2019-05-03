@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 from application import app, db, login_required
 from application.scripts.models import Script
-from application.scripts.forms import ScriptForm
+from application.scripts.forms import ScriptForm, SearchForm
 from application.auth.models import User, Userrole
 from application.comments.models import Comment
 from application.comments.forms import CommentForm
@@ -15,7 +15,7 @@ from application.favourites.models import Favourite
 
 @app.route("/scripts/", methods=["GET"])
 def script_list():
-    return render_template("scripts/list.html", scripts = Script.query.all())
+    return render_template("scripts/list.html", scripts = Script.query.all(), form=SearchForm())
 
 
 @app.route("/scripts/new/", methods=["GET"])
@@ -60,6 +60,18 @@ def script_show(script_id):
 # POST methods
 
 @app.route("/scripts/", methods=["POST"])
+def script_search():
+    form = SearchForm(request.form)
+
+    if not form.validate():
+        return redirect(url_for("script_list"))
+    
+    scripts = search_scripts(form.parameter.data)
+
+    return render_template("scripts/list.html", scripts=scripts, form=form)
+
+
+@app.route("/scripts/add/", methods=["POST"])
 @login_required()
 def script_create():
     form = ScriptForm(request.form)
@@ -181,6 +193,14 @@ def validate_script_id(script_id):
         return False
     
     return True
+
+def search_scripts(param):
+    stmt = text("SELECT * FROM script "
+                "WHERE script.name LIKE \"%" + str(param) +
+                "%\" OR script.language LIKE \"%" + str(param) + "%\"")
+    res = db.engine.execute(stmt)
+
+    return res
 
 def find_comments_with_author_name(script_id):
     stmt = text("SELECT comment.*, account.username AS author_name FROM comment, account "

@@ -70,10 +70,10 @@ Related SQL query:
 **User can view their own user info page**
 ```sql
 Related SQL queries:
-User - SELECT * FROM account WHERE account.id = (current_user.id);
-User's scripts - SELECT * FROM script WHERE script.author_id = (current_user.id);
-User's favourites - SELECT script.* FROM script, favourite WHERE script.id = favourite.script_id AND favourite.user_id = (current_user.id);
-User's comments - SELECT * FROM comment WHERE comment.author_id = (current_user.id);
+User | SELECT * FROM account WHERE account.id = (current_user.id);
+User's scripts | SELECT * FROM script WHERE script.author_id = (current_user.id);
+User's favourites | SELECT script.* FROM script, favourite WHERE script.id = favourite.script_id AND favourite.user_id = (current_user.id);
+User's comments | SELECT * FROM comment WHERE comment.author_id = (current_user.id);
 ```
 
 **User can view other user's less detailed user info page**

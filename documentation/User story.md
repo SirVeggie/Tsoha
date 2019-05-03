@@ -6,7 +6,7 @@
 
 ## Current features
 ### Features available to everyone
-Anyone can view the home page
+**Anyone can view the home page**
 
 **Anyone can see the amount of contributing users**
 ```sql

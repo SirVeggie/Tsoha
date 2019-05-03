@@ -184,8 +184,8 @@ def validate_script_id(script_id):
 
 def find_comments_with_author_name(script_id):
     stmt = text("SELECT comment.*, account.username AS author_name FROM comment, account "
-                    "WHERE comment.author_id = account.id "
-                    "AND comment.script_id = " + str(script_id))
+                "WHERE comment.author_id = account.id "
+                "AND comment.script_id = " + str(script_id))
     res = db.engine.execute(stmt)
 
     return res
